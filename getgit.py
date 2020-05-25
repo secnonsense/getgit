@@ -55,7 +55,8 @@ while x < len(response_dict['items']):
 	if response_dict['items'][x]['description']:
 		print ('Description: ' + response_dict['items'][x]['description'])
 	print ('Number of Watchers: ' + str(response_dict['items'][x]['watchers']))
-	print ('Language: ' + response_dict['items'][x]['language'])
+	if response_dict['items'][x]['language']:
+            print ('Language: ' + response_dict['items'][x]['language'])
 	print ('Number of Stars: ' + str(response_dict['items'][x]['stargazers_count']))
 	print ('Created at: ' + response_dict['items'][x]['created_at'])
 	print ('Size: ' + str(response_dict['items'][x]['size']))
