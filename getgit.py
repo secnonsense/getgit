@@ -46,6 +46,19 @@ conn.request(method, url, None, headers)
 httpResponse = conn.getresponse()
 
 response_dict=json.loads(httpResponse.read())
-
-print (response_dict)
-
+x=0
+while x < len(response_dict['items']):
+	print ('Full Name: ' + response_dict['items'][x]['full_name'])
+	print ('Owner: ' + response_dict['items'][x]['owner']['login'])
+	print ('Owner Type: ' + response_dict['items'][x]['owner']['type'])
+	print ('Html Url: ' + response_dict['items'][x]['html_url'])
+	if response_dict['items'][x]['description']:
+		print ('Description: ' + response_dict['items'][x]['description'])
+	print ('Number of Watchers: ' + str(response_dict['items'][x]['watchers']))
+	print ('Language: ' + response_dict['items'][x]['language'])
+	print ('Number of Stars: ' + str(response_dict['items'][x]['stargazers_count']))
+	print ('Created at: ' + response_dict['items'][x]['created_at'])
+	print ('Size: ' + str(response_dict['items'][x]['size']))
+	print ('Open Issues Count: ' + str(response_dict['items'][x]['open_issues_count']))
+	print ('----------------------------------')
+	x=x+1
