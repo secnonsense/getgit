@@ -2,7 +2,7 @@
 
 import http.client,ssl,json,argparse
 
-plus=0
+plus=x=0
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-q", "--query", help="Search Terms", action="store", dest="query")
@@ -46,7 +46,7 @@ conn.request(method, url, None, headers)
 httpResponse = conn.getresponse()
 
 response_dict=json.loads(httpResponse.read())
-x=0
+
 while x < len(response_dict['items']):
 	print ('Full Name: ' + response_dict['items'][x]['full_name'])
 	print ('Owner: ' + response_dict['items'][x]['owner']['login'])
