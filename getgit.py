@@ -16,9 +16,12 @@ url='/search/repositories?q='
 starsurl='stars:>='
 language='language:'
 user='user:'
-
 endurl='&sort=stars&order=desc&per_page=100'
 
+if not (args.query or args.language or args.stars or args.user):
+        print("An argument is required.")
+        parser.print_usage()
+        quit()
 if args.query:
 	url = url + args.query
 	plus=1
