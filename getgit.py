@@ -26,7 +26,7 @@ if args.language:
 	if plus:
 		url = url + "+"
 	url = url + language + args.language
-	plus=2
+	plus=1
 if args.stars:
 	if plus:
 		url = url + "+"
