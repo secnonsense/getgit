@@ -49,6 +49,8 @@ response_dict=json.loads(httpResponse.read())
 
 print ('Results of getgit query.......')
 
+count=len(response_dict['items'])
+
 while x < len(response_dict['items']):
 	print ('Full Name: ' + response_dict['items'][x]['full_name'])
 	print ('Owner: ' + response_dict['items'][x]['owner']['login'])
@@ -65,4 +67,4 @@ while x < len(response_dict['items']):
 	print ('Open Issues Count: ' + str(response_dict['items'][x]['open_issues_count']))
 	print ('----------------------------------')
 	x=x+1
-print ('Total number of results: " + len(response_dict['items']))
+print ('Total number of results: ' + str(count))
