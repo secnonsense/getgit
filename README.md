@@ -1,7 +1,9 @@
 # getgit
 Python script using git api to search through git repos
 
-Maximum results is 100
+Maximum results is 100.  Sorts decending by number of stars by default.    
+
+Usage: python3 getgit.py [switches]  
 
 Available switches:
 
