@@ -50,23 +50,19 @@ httpResponse = conn.getresponse()
 
 response_dict=json.loads(httpResponse.read())
 
-print ('Results of getgit query.......')
+print ('Results of getgit query')
+print ('----------------------------------')
 
 count=len(response_dict['items'])
 
 while x < len(response_dict['items']):
-	print ('Full Name: ' + response_dict['items'][x]['full_name'])
-	print ('Owner: ' + response_dict['items'][x]['owner']['login'])
-	print ('Owner Type: ' + response_dict['items'][x]['owner']['type'])
-	print ('Html Url: ' + response_dict['items'][x]['html_url'])
-	if response_dict['items'][x]['description']:
-		print ('Description: ' + response_dict['items'][x]['description'])
-	if response_dict['items'][x]['language']:
-            print ('Language: ' + response_dict['items'][x]['language'])
-	print ('Number of Stars: ' + str(response_dict['items'][x]['stargazers_count']))
-	print ('Created at: ' + response_dict['items'][x]['created_at'])
-	print ('Size: ' + str(response_dict['items'][x]['size']))
-	print ('Open Issues Count: ' + str(response_dict['items'][x]['open_issues_count']))
-	print ('----------------------------------')
-	x=x+1
+        print ('Full Name: ' + response_dict['items'][x]['full_name'] + '  |  Created at: ' + response_dict['items'][x]['created_at'] + '  |  Number of Stars: ' + str(response_dict['items'][x]['stargazers_count']))
+        if response_dict['items'][x]['description']:
+            print ('Description: ' + response_dict['items'][x]['description'])
+        print ('Owner: ' + response_dict['items'][x]['owner']['login'] + '  |  Owner Type: ' + response_dict['items'][x]['owner']['type'])
+        print ('Html Url: ' + response_dict['items'][x]['html_url'])
+        if response_dict['items'][x]['language']:
+            print ('Language: ' + response_dict['items'][x]['language'] + '  |  Size: ' + str(response_dict['items'][x]['size']) + '  |  Open Issues Count: ' + str(response_dict['items'][x]['open_issues_count']))
+        print ('----------------------------------')
+        x=x+1
 print ('Total number of results: ' + str(count))
