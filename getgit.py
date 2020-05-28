@@ -1,6 +1,6 @@
 #!/usr/local/bin/python3
 
-import http.client,ssl,json,argparse
+import http.client,ssl,json,argparse,datetime
 
 plus=x=0
 
@@ -9,6 +9,7 @@ parser.add_argument("-q", "--query", help="Search Terms", action="store", dest="
 parser.add_argument("-l", "--language", help="language to search for", action="store", dest="language")
 parser.add_argument("-s", "--stars", help="minimum number of stars", action="store", dest="stars")
 parser.add_argument("-u", "--user", help="user name", action="store", dest="user")
+parser.add_argument("-p", "--pushed", help="Date (YYYY-MM-DD) last update was pushed", action="store", dest="pushed")
 args = parser.parse_args()
 
 conn = http.client.HTTPSConnection('api.github.com', context=ssl._create_unverified_context())
@@ -16,6 +17,7 @@ url='/search/repositories?q='
 starsurl='stars:>='
 language='language:'
 user='user:'
+push='pushed:>='
 endurl='&sort=stars&order=desc&per_page=100'
 
 if not (args.query or args.language or args.stars or args.user):
@@ -39,6 +41,15 @@ if args.user:
 	if plus:
 		url = url + "+"
 	url = url + user + args.user
+	plus=1
+if args.pushed:
+	try:
+		datetime.datetime.strptime(args.pushed, '%Y-%m-%d')
+	except ValueError:	
+		raise ValueError("Invalid date format for last update.  Should be YYYY-MM-DD")
+	if plus:
+		url = url + "+"
+	url = url + push + args.pushed	
 
 url=url+endurl
 method = 'GET'
@@ -56,10 +67,10 @@ print ('----------------------------------')
 count=len(response_dict['items'])
 
 while x < len(response_dict['items']):
-        print ('Full Name: ' + response_dict['items'][x]['full_name'] + '  |  Created at: ' + response_dict['items'][x]['created_at'] + '  |  Number of Stars: ' + str(response_dict['items'][x]['stargazers_count']))
+        print ('Full Name: ' + response_dict['items'][x]['full_name'] + '  |  Created at: ' + response_dict['items'][x]['created_at'] + '  |  Last Updated: ' + response_dict['items'][x]['pushed_at'])
         if response_dict['items'][x]['description']:
             print ('Description: ' + response_dict['items'][x]['description'])
-        print ('Owner: ' + response_dict['items'][x]['owner']['login'] + '  |  Owner Type: ' + response_dict['items'][x]['owner']['type'])
+        print ('Owner: ' + response_dict['items'][x]['owner']['login'] + '  |  Owner Type: ' + response_dict['items'][x]['owner']['type'] + '  |  Number of Stars: ' + str(response_dict['items'][x]['stargazers_count'])) 
         print ('Html Url: ' + response_dict['items'][x]['html_url'])
         if response_dict['items'][x]['language']:
             print ('Language: ' + response_dict['items'][x]['language'] + '  |  Size: ' + str(response_dict['items'][x]['size']) + '  |  Open Issues Count: ' + str(response_dict['items'][x]['open_issues_count']))
