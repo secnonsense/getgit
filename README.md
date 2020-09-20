@@ -8,7 +8,7 @@ Usage: python3 getgit.py [switches]
 Available switches:
 
 |Switch|Usage|
-|:--|:--|
+|:---|:--|
 |-l --language |List the language specified for the repo.  Example: -l python|
 |-u  --user |Specify the username of the owner of the repo.  Example -u secnonsense| 
 |-s  --stars|Only show repos with this number of stars or greater.  Example -s 1000|
